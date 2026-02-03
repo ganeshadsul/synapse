@@ -3,6 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { DatabaseModule } from './modules/database/database.module';
+import { SeederConfigModule } from './modules/seeder-config/seeder-config.module';
 import Joi from 'joi';
 
 @Module({
@@ -21,6 +22,7 @@ import Joi from 'joi';
       }),
     }),
     DatabaseModule,
+    SeederConfigModule,
   ],
   controllers: [AppController],
   providers: [AppService],
