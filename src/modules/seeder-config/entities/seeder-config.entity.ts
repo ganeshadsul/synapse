@@ -7,6 +7,9 @@ export class SeederConfig extends BaseEntity {
   @Column({ unique: true })
   table: string;
 
-  @Column({ default: IsActiveStatus.INACTIVE })
+  @Column({
+    default: IsActiveStatus.INACTIVE,
+    comment: `INACTIVE = 0, ACTIVE = 1, ARCHIVED = 2, PENDING = 3, DONE = 4, BANNED = 5`,
+  })
   isActive: number = IsActiveStatus.INACTIVE;
 }
