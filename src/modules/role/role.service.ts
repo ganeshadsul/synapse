@@ -6,7 +6,7 @@ import { SeederConfigService } from '../seeder-config/seeder-config.service';
 import RolesData from './data/roles.json';
 
 @Injectable()
-export class RolesService {
+export class RoleService {
   constructor(
     @InjectRepository(Role) private readonly roleRepo: Repository<Role>,
     private readonly seederConfigService: SeederConfigService,
