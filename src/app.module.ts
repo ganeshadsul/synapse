@@ -6,6 +6,7 @@ import { DatabaseModule } from './modules/database/database.module';
 import { GendersModule } from './modules/genders/genders.module';
 import { SeederConfigModule } from './modules/seeder-config/seeder-config.module';
 import { RolesModule } from './modules/roles/roles.module';
+import { CategoryModule } from './modules/category/catagory.module';
 import Joi from 'joi';
 
 @Module({
@@ -27,6 +28,7 @@ import Joi from 'joi';
     GendersModule,
     SeederConfigModule,
     RolesModule,
+    CategoryModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,0 +1,10 @@
+[
+  { "name": "Technology", "slug": "technology" },
+  { "name": "Science", "slug": "science" },
+  { "name": "Programming", "slug": "programming" },
+  { "name": "Media", "slug": "media" },
+  { "name": "Design", "slug": "design" },
+  { "name": "News", "slug": "news" },
+  { "name": "Education", "slug": "education" },
+  { "name": "Lifestyle", "slug": "lifestyle" }
+]
