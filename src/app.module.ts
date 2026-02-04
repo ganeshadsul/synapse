@@ -3,7 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { DatabaseModule } from './modules/database/database.module';
-import { GendersModule } from './modules/genders/genders.module';
+import { GenderModule } from './modules/gender/gender.module';
 import { SeederConfigModule } from './modules/seeder-config/seeder-config.module';
 import { RolesModule } from './modules/roles/roles.module';
 import { CategoryModule } from './modules/category/catagory.module';
@@ -25,7 +25,7 @@ import Joi from 'joi';
       }),
     }),
     DatabaseModule,
-    GendersModule,
+    GenderModule,
     SeederConfigModule,
     RolesModule,
     CategoryModule,
