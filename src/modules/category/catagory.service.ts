@@ -7,7 +7,7 @@ import { SeederConfigService } from '../seeder-config/seeder-config.service';
 import CategoriesData from './data/categories.json';
 
 @Injectable()
-export class CatagoriesService {
+export class CatagoryService {
   constructor(
     @InjectRepository(Category)
     private readonly categoryRepo: Repository<Category>,
