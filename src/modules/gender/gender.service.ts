@@ -6,7 +6,7 @@ import { SeederConfigService } from '../seeder-config/seeder-config.service';
 import gendersData from './data/genders.json';
 
 @Injectable()
-export class GendersService {
+export class GenderService {
   constructor(
     @InjectRepository(Gender)
     private readonly genderRepo: Repository<Gender>,

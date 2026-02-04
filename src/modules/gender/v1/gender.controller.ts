@@ -4,7 +4,7 @@ import { Controller, Get } from '@nestjs/common';
   path: 'genders',
   version: '1',
 })
-export class GendersController {
+export class GenderController {
   @Get()
   getAll() {
     return {
