@@ -5,6 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 import { DatabaseModule } from './modules/database/database.module';
 import { GendersModule } from './modules/genders/genders.module';
 import { SeederConfigModule } from './modules/seeder-config/seeder-config.module';
+import { RolesModule } from './modules/roles/roles.module';
 import Joi from 'joi';
 
 @Module({
@@ -25,6 +26,7 @@ import Joi from 'joi';
     DatabaseModule,
     GendersModule,
     SeederConfigModule,
+    RolesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Admin",
+    "code": "admin",
+    "level": 1,
+    "description": "System owner, Full clearance."
+  },
+  {
+    "name": "Moderator",
+    "code": "moderator",
+    "level": 2,
+    "description": "Content police, Can manage users."
+  },
+  {
+    "name": "User",
+    "code": "user",
+    "level": 3,
+    "description": "Standard user."
+  }
+]
