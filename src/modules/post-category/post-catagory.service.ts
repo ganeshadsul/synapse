@@ -1,16 +1,16 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Category } from './entities/category.entity';
+import { PostCategory } from './entities/post-category.entity';
 import { Repository } from 'typeorm';
 import { ConfigService } from '@nestjs/config';
 import { SeederConfigService } from '../seeder-config/seeder-config.service';
-import CategoriesData from './data/categories.json';
+import CategoriesData from './data/post-categories.json';
 
 @Injectable()
-export class CatagoryService {
+export class PostCategoryService {
   constructor(
-    @InjectRepository(Category)
-    private readonly categoryRepo: Repository<Category>,
+    @InjectRepository(PostCategory)
+    private readonly categoryRepo: Repository<PostCategory>,
     private readonly seederConfigService: SeederConfigService,
     private readonly configService: ConfigService,
     private readonly logger: Logger,

@@ -1,8 +1,8 @@
 import { Column, Entity, ManyToMany } from 'typeorm';
 import { BaseEntity } from '../../../common/entities/base.entity';
 
-@Entity('categories')
-export class Category extends BaseEntity {
+@Entity('post_categories')
+export class PostCategory extends BaseEntity {
   @Column({ length: 50, unique: true })
   name: string;
 
