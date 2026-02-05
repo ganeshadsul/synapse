@@ -10,7 +10,7 @@ import { map } from 'rxjs/operators';
 import { Reflector } from '@nestjs/core';
 import { RESPONSE_MESSGE_KEY } from '../decorators/response-message.decorator';
 import { Response } from 'express';
-import { RESPONSE_MESSAGE } from '../constants/response-messages.constant';
+import { RESPONSE_MESSAGE } from '../constants/messages/response-messages.constant';
 
 @Injectable()
 export class TransformInterceptor<T> implements NestInterceptor<
