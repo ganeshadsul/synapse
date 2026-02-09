@@ -1,7 +1,11 @@
 export class ErrorResponse {
-  message: string | string[];
-  error?: string;
+  success: boolean;
   statusCode: number;
-  errors: any[];
+  message: string;
+  data: null;
+  errors: string[] | null;
   timestamp: string;
+  path: string;
+  method: string;
+  stack?: string;
 }

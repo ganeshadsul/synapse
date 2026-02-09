@@ -1,14 +1,11 @@
-import { NestFactory, Reflector } from '@nestjs/core';
+import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import {
   BadRequestException,
   ValidationPipe,
   VersioningType,
 } from '@nestjs/common';
-import { TransformInterceptor } from './common/interceptors/transform.interceptor';
 import { ValidationError } from 'class-validator';
-import { AllExceptionFilter } from './common/filters/all-exceptions.filter';
-import { TypeOrmException } from './common/filters/typeorm-exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -36,8 +33,6 @@ async function bootstrap() {
     }),
   );
 
-  app.useGlobalFilters(new AllExceptionFilter(), new TypeOrmException());
-  app.useGlobalInterceptors(new TransformInterceptor(new Reflector()));
   await app.listen(process.env.PORT ?? 3000);
 }
 void bootstrap();

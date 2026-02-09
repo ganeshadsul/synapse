@@ -8,6 +8,9 @@ import { SeederConfigModule } from './modules/seeder-config/seeder-config.module
 import { RoleModule } from './modules/role/role.module';
 import { PostCategoryModule } from './modules/post-category/post-category.module';
 import Joi from 'joi';
+import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
+import { AllExceptionsFilter } from './common/filters/all-exceptions.filter';
+import { TransformInterceptor } from './common/interceptors/transform.interceptor';
 
 @Module({
   imports: [
@@ -31,6 +34,16 @@ import Joi from 'joi';
     PostCategoryModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_FILTER,
+      useClass: AllExceptionsFilter,
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: TransformInterceptor,
+    },
+  ],
 })
 export class AppModule {}
