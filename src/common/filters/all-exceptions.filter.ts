@@ -1,3 +1,4 @@
+// filters/all-exceptions.filter.ts
 import {
   ExceptionFilter,
   Catch,
@@ -8,9 +9,11 @@ import {
 } from '@nestjs/common';
 import { HttpAdapterHost } from '@nestjs/core';
 import { ConfigService } from '@nestjs/config';
+import {
+  NestErrorResponse,
+  ValidationErrorDetail,
+} from '../interfaces/nest-error-response.interface';
 import { ErrorResponse } from '../interfaces/error-response.interface';
-import { NestErrorResponse } from '../interfaces/nest-error-response.interface';
-
 @Catch()
 export class AllExceptionsFilter implements ExceptionFilter {
   private readonly logger = new Logger(AllExceptionsFilter.name);
@@ -22,8 +25,9 @@ export class AllExceptionsFilter implements ExceptionFilter {
 
   catch(exception: unknown, host: ArgumentsHost): void {
     const { httpAdapter } = this.httpAdapterHost;
-
     const ctx = host.switchToHttp();
+
+    // Treat request/response as unknown to avoid 'any'
     const request = ctx.getRequest<unknown>();
 
     const path = httpAdapter.getRequestUrl(request) as string;
@@ -35,19 +39,31 @@ export class AllExceptionsFilter implements ExceptionFilter {
         : HttpStatus.INTERNAL_SERVER_ERROR;
 
     let message = 'Internal server error';
-    let errors: string[] | null = null;
+    // Strictly typed variable to hold errors
+    let errors: string[] | ValidationErrorDetail[] | null = null;
 
-    // Extract message & validation errors
     if (exception instanceof HttpException) {
       const response = exception.getResponse();
 
       if (typeof response === 'object' && response !== null) {
+        // Safe cast to our strict interface
         const responseObj = response as NestErrorResponse;
 
-        if (Array.isArray(responseObj.message)) {
+        // CASE 1: Your Custom Validation Pipe (returns 'errors' array of objects)
+        if (responseObj.errors) {
+          message =
+            typeof responseObj.message === 'string'
+              ? responseObj.message
+              : 'Validation Error';
+          errors = responseObj.errors;
+        }
+        // CASE 2: Default NestJS Validation (returns 'message' array of strings)
+        else if (Array.isArray(responseObj.message)) {
           message = 'Validation Error';
           errors = responseObj.message;
-        } else {
+        }
+        // CASE 3: Standard Error
+        else {
           message =
             typeof responseObj.message === 'string'
               ? responseObj.message
@@ -58,30 +74,28 @@ export class AllExceptionsFilter implements ExceptionFilter {
       }
     } else if (exception instanceof Error) {
       message = exception.message;
+      const stack = exception.stack;
+      if (this.configService.get<string>('NODE_ENV') !== 'production') {
+        this.logger.error(`[${method}] ${path}`, stack);
+      }
     }
 
-    // 3. Determine if we should show the stack trace
     const isProduction =
       this.configService.get<string>('NODE_ENV') === 'production';
 
-    // Safe extraction of stack
-    const stack = exception instanceof Error ? exception.stack : undefined;
-
-    if (!isProduction && httpStatus === 500) {
-      // Optional: Log it to console in dev for visibility
-      this.logger.error(`[${method}] ${path}`, stack);
-    }
-
-    const responseBody: ErrorResponse = {
+    // Construct the response using strict types
+    const responseBody: ErrorResponse<null> = {
       success: false,
       statusCode: httpStatus,
       message,
       data: null,
-      errors,
+      errors, // Types match perfectly now
       timestamp: new Date().toISOString(),
       path,
       method,
-      ...(!isProduction && { stack }),
+      ...(!isProduction && exception instanceof Error
+        ? { stack: exception.stack }
+        : {}),
     };
 
     httpAdapter.reply(ctx.getResponse(), responseBody, httpStatus);
