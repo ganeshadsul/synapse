@@ -6,7 +6,7 @@ import { Gender } from './entities/gender.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Gender])],
-  providers: [GenderService, Logger],
+  providers: [GenderService],
   controllers: [V1GenderController],
 })
 export class GenderModule {}

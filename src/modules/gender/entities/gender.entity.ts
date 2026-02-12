@@ -1,4 +1,10 @@
-import { Column, Entity, ManyToMany } from 'typeorm';
+import {
+  BeforeInsert,
+  BeforeUpdate,
+  Column,
+  Entity,
+  ManyToMany,
+} from 'typeorm';
 import { BaseEntity } from '../../../common/entities/base.entity';
 
 @Entity('genders')
@@ -17,4 +23,12 @@ export class Gender extends BaseEntity {
 
   //   @ManyToMany('User', { nullable: true })
   //   updatedBy: string;
+
+  @BeforeInsert()
+  @BeforeUpdate()
+  generateCode() {
+    if (this.name) {
+      this.code = this.name.trim().toLowerCase().replace(/\s+/g, '-');
+    }
+  }
 }
