@@ -12,4 +12,16 @@ export const RESPONSE_MESSAGE = {
     RESTORED: 'Gender restored successfully.',
     NOT_FOUND: 'Gender details not found.',
   },
+  ROLE: {
+    CREATED: 'Role created successfully.',
+    UPDATED: 'Role udpated successfully.',
+    PATCHED: 'Role patched successfully.',
+    FOUND_ALL: 'Roles found.',
+    FOUND_ONE: 'Role found.',
+    ACTIVATED: 'Role activated successfully .',
+    DE_ACTIVATED: 'Role de-activated successfully.',
+    DELETED: 'Role deleted successfully.',
+    RESTORED: 'Role restored successfully.',
+    NOT_FOUND: 'Role details not found.',
+  },
 };
