@@ -5,7 +5,6 @@ import {
   Get,
   HttpCode,
   HttpStatus,
-  Logger,
   Param,
   Patch,
   Post,
@@ -60,7 +59,6 @@ export class GenderController {
 
   // update/replace one
   @Put('/:id')
-  @HttpCode(HttpStatus.NO_CONTENT)
   @ResponseMessage(RESPONSE_MESSAGE.GENDER.UPDATED)
   async updateOne(
     @Param('id') id: string,
@@ -71,6 +69,7 @@ export class GenderController {
 
   // delete one
   @Delete('/:id')
+  @HttpCode(HttpStatus.NO_CONTENT)
   @ResponseMessage(RESPONSE_MESSAGE.GENDER.DELETED)
   async deleteOne(@Param('id') id: string) {
     return await this.genderService.deleteOne(id);

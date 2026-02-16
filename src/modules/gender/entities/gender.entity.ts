@@ -28,7 +28,7 @@ export class Gender extends BaseEntity {
   @BeforeUpdate()
   generateCode() {
     if (this.name) {
-      this.code = this.name.trim().toLowerCase().replace(/\s+/g, '-');
+      this.code = this.name.trim().toLowerCase().replaceAll(/\s+/g, '-');
     }
   }
 }

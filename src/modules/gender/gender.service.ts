@@ -83,15 +83,9 @@ export class GenderService {
     const gender = await this.genderRepo.findOneBy({ id });
     if (!gender) throw new NotFoundException(RESPONSE_MESSAGE.GENDER.NOT_FOUND);
 
-    if (replaceGenderDto.name) {
-      gender.name = replaceGenderDto.name;
-    }
-    if (replaceGenderDto.shortName)
-      gender.shortName = replaceGenderDto.shortName;
-    if (replaceGenderDto.isActive) gender.isActive = replaceGenderDto.isActive;
+    Object.assign(gender, replaceGenderDto);
 
     const genderObj = this.genderRepo.create(gender);
-
     const updatedGender = await this.genderRepo.save(genderObj);
     return { gender: updatedGender };
   }
