@@ -25,7 +25,7 @@ export class SeederConfigService {
     }
 
     this.logger.log(`Configuration found. isActive: ${config.isActive}`);
-    return config.isActive === 0;
+    return config.isActive != 4;
   }
 
   async setSeeded(tableName: string) {
