@@ -11,6 +11,7 @@ import Joi from 'joi';
 import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { AllExceptionsFilter } from './common/filters/all-exceptions.filter';
 import { TransformInterceptor } from './common/interceptors/transform.interceptor';
+import { UserModule } from './modules/user/user.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { TransformInterceptor } from './common/interceptors/transform.intercepto
     GenderModule,
     RoleModule,
     PostCategoryModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [

@@ -3,9 +3,13 @@ import {
   BeforeUpdate,
   Column,
   Entity,
-  ManyToMany,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
 } from 'typeorm';
 import { BaseEntity } from '../../../common/entities/base.entity';
+import { UserRoleMapping } from '../../user/entities/user-role-mapping.entity';
+import { User } from '../../user/entities/user.entity';
 
 @Entity('roles')
 export class Role extends BaseEntity {
@@ -21,11 +25,18 @@ export class Role extends BaseEntity {
   @Column()
   description: string;
 
-  // @ManyToMany('User', { nullable: true })
-  // createdBy: string;
+  @ManyToOne(() => User, { nullable: true })
+  @JoinColumn({ name: 'createdById' })
+  createdBy: User;
 
-  // @ManyToMany('User', { nullable: true })
-  // updatedBy: string;
+  @ManyToOne(() => User, { nullable: true })
+  @JoinColumn({ name: 'updatedById' })
+  updatedBy: User;
+
+  @OneToMany(() => UserRoleMapping, (userRoleMapping) => userRoleMapping.role, {
+    cascade: true,
+  })
+  userRoleMappings: UserRoleMapping[];
 
   @BeforeInsert()
   @BeforeUpdate()

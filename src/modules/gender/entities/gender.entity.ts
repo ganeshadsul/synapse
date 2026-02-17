@@ -3,9 +3,11 @@ import {
   BeforeUpdate,
   Column,
   Entity,
-  ManyToMany,
+  JoinColumn,
+  ManyToOne,
 } from 'typeorm';
 import { BaseEntity } from '../../../common/entities/base.entity';
+import { User } from '../../user/entities/user.entity';
 
 @Entity('genders')
 export class Gender extends BaseEntity {
@@ -18,11 +20,13 @@ export class Gender extends BaseEntity {
   @Column({ length: 5, unique: true })
   shortName: string;
 
-  //   @ManyToMany('User', { nullable: true })
-  //   createdBy: string;
+  @ManyToOne(() => User, { nullable: true })
+  @JoinColumn({ name: 'createdById' })
+  createdBy: User;
 
-  //   @ManyToMany('User', { nullable: true })
-  //   updatedBy: string;
+  @ManyToOne(() => User, { nullable: true })
+  @JoinColumn({ name: 'updatedById' })
+  updatedBy: User;
 
   @BeforeInsert()
   @BeforeUpdate()
