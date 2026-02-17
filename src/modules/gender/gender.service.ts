@@ -31,11 +31,18 @@ export class GenderService {
 
     this.logger.log(`Checking seeder config for table: ${tableName}`);
     if (await this.seederConfigService.shouldSeed(tableName)) {
-      // cleared the old entries
-      await this.genderRepo.clear();
-
       // inserting new entries
-      await this.genderRepo.insert(gendersData);
+      for (const gender of gendersData) {
+        const exists = await this.genderRepo.findOne({
+          where: { name: gender.name },
+        });
+
+        if (!exists) {
+          const newGender = this.genderRepo.create(gender);
+          await this.genderRepo.save(newGender);
+          this.logger.log(`Seeded missing gender: ${gender.name}`);
+        }
+      }
 
       // Mard isSeeded as true as data is inserted successfully
       await this.seederConfigService.setSeeded(tableName);

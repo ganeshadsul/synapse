@@ -24,9 +24,17 @@ export class RoleService {
 
     if (await this.seederConfigService.shouldSeed(tableName)) {
       // cleared the old entries
-      await this.roleRepo.clear();
+      for (const role of RolesData) {
+        const exists = await this.roleRepo.findOne({
+          where: { name: role.name },
+        });
 
-      await this.roleRepo.save(RolesData);
+        if (!exists) {
+          const newRole = this.roleRepo.create(role);
+          await this.roleRepo.save(newRole);
+          this.logger.log(`Seeded missing role: ${role.name}`);
+        }
+      }
 
       await this.seederConfigService.setSeeded(tableName);
     }
