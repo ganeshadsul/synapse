@@ -18,7 +18,7 @@ export class User extends BaseEntity {
   @Column({ unique: true, nullable: true, default: null })
   email: string;
 
-  @ManyToOne(() => Gender)
+  @ManyToOne(() => Gender, { nullable: true })
   @JoinColumn({ name: 'genderId' })
   gender: Gender;
 
@@ -26,7 +26,7 @@ export class User extends BaseEntity {
   @Exclude()
   password: string;
 
-  @Column({ type: 'timestamp' })
+  @Column({ type: 'timestamp', nullable: true })
   passwordChangedAt: Date;
 
   @Column({ type: 'boolean', default: false })

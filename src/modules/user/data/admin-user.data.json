@@ -1,0 +1,19 @@
+{
+  "firstName": "System",
+  "lastName": "Admin",
+  "phone": "",
+  "email": "admin@synapse.com",
+  "password": "Admin@1234",
+  "passwordChangedAt": null,
+  "isBlacklisted": false,
+  "gender": {
+    "id": null
+  },
+  "userRoleMappings": [
+    {
+      "role": {
+        "id": ""
+      }
+    }
+  ]
+}
