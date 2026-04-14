@@ -7,9 +7,9 @@ import { Role } from '../../role/entities/role.entity';
 export class UserRoleMapping extends BaseEntity {
   @ManyToOne(() => User)
   @JoinColumn({ name: 'userId' })
-  user: User;
+  user!: User;
 
   @ManyToOne(() => Role)
   @JoinColumn({ name: 'roleId' })
-  role: Role;
+  role!: Role;
 }
