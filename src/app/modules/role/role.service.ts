@@ -91,7 +91,7 @@ export class RoleService {
   async restoreOne(id: string) {
     const result = await this.roleRepo.restore(id);
     if (result.affected === 0) {
-      throw new NotFoundException(`Deleted Gender with ID ${id} not found`);
+      throw new NotFoundException(`Gender with ID ${id} not found`);
     }
     const role = await this.roleRepo.findOneBy({ id });
     return { role };

@@ -2,16 +2,17 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
-import { DatabaseModule } from './modules/database/database.module';
-import { GenderModule } from './modules/gender/gender.module';
-import { SeederConfigModule } from './modules/seeder-config/seeder-config.module';
-import { RoleModule } from './modules/role/role.module';
-import { PostCategoryModule } from './modules/post-category/post-category.module';
+import { DatabaseModule } from './app/modules/database/database.module';
+import { GenderModule } from './app/modules/gender/gender.module';
+import { SeederConfigModule } from './app/modules/seeder-config/seeder-config.module';
+import { RoleModule } from './app/modules/role/role.module';
+import { PostCategoryModule } from './app/modules/post-category/post-category.module';
 import Joi from 'joi';
 import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
-import { AllExceptionsFilter } from './common/filters/all-exceptions.filter';
-import { TransformInterceptor } from './common/interceptors/transform.interceptor';
-import { UserModule } from './modules/user/user.module';
+import { AllExceptionsFilter } from './app/common/filters/all-exceptions.filter';
+import { TransformInterceptor } from './app/common/interceptors/transform.interceptor';
+import { UserModule } from './app/modules/user/user.module';
+import { SystemModule } from './app/modules/system/system.module';
 
 @Module({
   imports: [
@@ -30,9 +31,10 @@ import { UserModule } from './modules/user/user.module';
     }),
     DatabaseModule,
     SeederConfigModule,
-    GenderModule,
-    RoleModule,
-    PostCategoryModule,
+    // GenderModule,
+    // RoleModule,
+    // PostCategoryModule,
+    SystemModule,
     UserModule,
   ],
   controllers: [AppController],

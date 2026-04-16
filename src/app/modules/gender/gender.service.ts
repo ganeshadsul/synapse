@@ -108,7 +108,7 @@ export class GenderService {
     const result = await this.genderRepo.restore(id);
 
     if (result.affected === 0) {
-      throw new NotFoundException(`Deleted Gender with ID ${id} not found`);
+      throw new NotFoundException(`Role with ID ${id} not found`);
     }
     const gender = await this.genderRepo.findOneBy({ id });
 
