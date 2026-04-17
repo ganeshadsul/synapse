@@ -3,16 +3,14 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { DatabaseModule } from './app/modules/database/database.module';
-import { GenderModule } from './app/modules/gender/gender.module';
 import { SeederConfigModule } from './app/modules/seeder-config/seeder-config.module';
-import { RoleModule } from './app/modules/role/role.module';
-import { PostCategoryModule } from './app/modules/post-category/post-category.module';
 import Joi from 'joi';
 import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { AllExceptionsFilter } from './app/common/filters/all-exceptions.filter';
 import { TransformInterceptor } from './app/common/interceptors/transform.interceptor';
 import { UserModule } from './app/modules/user/user.module';
 import { SystemModule } from './app/modules/system/system.module';
+import { AuthModule } from './app/modules/auth/auth.module';
 
 @Module({
   imports: [
@@ -31,11 +29,9 @@ import { SystemModule } from './app/modules/system/system.module';
     }),
     DatabaseModule,
     SeederConfigModule,
-    // GenderModule,
-    // RoleModule,
-    // PostCategoryModule,
     SystemModule,
     UserModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [
