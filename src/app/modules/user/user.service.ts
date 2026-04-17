@@ -69,6 +69,9 @@ export class UserService {
   async create(createuserDto: CreateUserDto): Promise<User> {
     const { roleIds, ...userData } = createuserDto;
 
+    this.logger.log(
+      `User Create Role ids: ${roleIds.join(', ')} | userData: ${JSON.stringify(userData)}`,
+    );
     const user = this.userRepo.create(userData);
 
     if (roleIds && roleIds.length > 0) {
@@ -84,5 +87,10 @@ export class UserService {
     }
 
     return await this.userRepo.save(user);
+  }
+
+  async findOneByEmail(email: string): Promise<User | null> {
+    const user = await this.userRepo.findOneBy({ email });
+    return user;
   }
 }
