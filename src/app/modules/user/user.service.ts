@@ -93,4 +93,13 @@ export class UserService {
     const user = await this.userRepo.findOneBy({ email });
     return user;
   }
+
+  async findOneByEmailWithPassword(email: string): Promise<User | null> {
+    const user = await this.userRepo
+      .createQueryBuilder('user')
+      .where({ email })
+      .addSelect('user.password')
+      .getOne();
+    return user;
+  }
 }

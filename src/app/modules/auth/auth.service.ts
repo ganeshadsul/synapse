@@ -24,10 +24,13 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
   async login(loginDto: LoginDto): Promise<{ accessToken: string }> {
+    this.logger.log(`loginDto: ${JSON.stringify(loginDto)}`);
     const { email, password } = loginDto;
 
-    const user = await this.userService.findOneByEmail(email);
-    if (!user) throw new UnauthorizedException('Invalid credentials.');
+    const user = await this.userService.findOneByEmailWithPassword(email);
+    if (!user) {
+      throw new UnauthorizedException('Invalid credentials.');
+    }
 
     if (user.isBlacklisted)
       throw new UnauthorizedException('This account it suspended.');
@@ -48,7 +51,9 @@ export class AuthService {
 
   async signup(signupDto: SignupDto) {
     this.logger.log(`signupDto: ${JSON.stringify(signupDto)}`);
-    const existingUser = await this.userService.findOneByEmail(signupDto.email);
+    const existingUser = await this.userService.findOneByEmailWithPassword(
+      signupDto.email,
+    );
 
     // Email already in use
     if (existingUser) {
