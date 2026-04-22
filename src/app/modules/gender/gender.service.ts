@@ -133,4 +133,12 @@ export class GenderService {
     const updatedGender = await this.genderRepo.save(gender);
     return { updatedGender };
   }
+
+  async getActiveGenderByCode(code: string) {
+    const gender = await this.genderRepo.findOneBy({
+      code,
+      isActive: IsActiveStatus.ACTIVE,
+    });
+    return gender;
+  }
 }

@@ -1,15 +1,9 @@
-import {
-  Body,
-  Controller,
-  ForbiddenException,
-  HttpCode,
-  HttpStatus,
-  Post,
-} from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
 import { ResponseMessage } from '../../../../../common/decorators/response-message.decorator';
 import { LoginDto } from '../../../dto/login.dto';
 import { UserService } from '../../../../user/user.service';
 import { AuthService } from '../../../auth.service';
+import { SignupDto } from '../../../dto/signup.dto';
 
 @Controller({
   path: 'auth',
@@ -26,6 +20,14 @@ export class AuthController {
   @ResponseMessage('Login successful.')
   async login(@Body() logInDto: LoginDto): Promise<any> {
     const response = await this.authService.login(logInDto);
+    return response;
+  }
+
+  @Post('/signup')
+  @HttpCode(HttpStatus.OK)
+  @ResponseMessage('You’re in! Your account has been created successfully 🚀.')
+  async signup(@Body() signupDto: SignupDto): Promise<any> {
+    const response = await this.authService.signup(signupDto);
     return response;
   }
 }

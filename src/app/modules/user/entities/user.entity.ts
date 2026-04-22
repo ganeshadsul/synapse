@@ -31,7 +31,7 @@ export class User extends BaseEntity {
   @JoinColumn({ name: 'genderId' })
   gender!: Gender;
 
-  @Column()
+  @Column({ select: false })
   @Exclude()
   password!: string;
 

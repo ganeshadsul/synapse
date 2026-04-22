@@ -4,10 +4,14 @@ import { AuthService } from './auth.service';
 import { UserModule } from '../user/user.module';
 import { JwtModule, JwtModuleOptions } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
+import { RoleModule } from '../role/role.module';
+import { GenderModule } from '../gender/gender.module';
 
 @Module({
   imports: [
     UserModule,
+    RoleModule,
+    GenderModule,
     JwtModule.registerAsync({
       inject: [ConfigService],
       useFactory: (configService: ConfigService): JwtModuleOptions => ({

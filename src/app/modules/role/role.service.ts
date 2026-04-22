@@ -114,4 +114,9 @@ export class RoleService {
 
     return { role };
   }
+
+  async getOneByCode(code: string) {
+    const role = await this.roleRepo.findOneBy({ code });
+    return role;
+  }
 }
