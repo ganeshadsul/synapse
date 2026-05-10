@@ -10,10 +10,7 @@ import { SignupDto } from '../../../dto/signup.dto';
   version: '1',
 })
 export class AuthController {
-  constructor(
-    private readonly authService: AuthService,
-    private readonly userService: UserService,
-  ) {}
+  constructor(private readonly authService: AuthService) {}
 
   @Post('/login')
   @HttpCode(HttpStatus.OK)

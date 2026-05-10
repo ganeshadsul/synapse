@@ -40,7 +40,7 @@ export class AuthService {
       throw new UnauthorizedException('Invalid credentials.');
 
     const payload = {
-      id: user.id,
+      sub: user.id,
       email: user.email,
     };
 
