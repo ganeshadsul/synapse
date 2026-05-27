@@ -21,11 +21,12 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(payload: JwtPayload) {
-    const user = await this.userService.findOneById(payload.sub);
+    const user = await this.userService.findByIdWithRoles(payload.sub);
 
     if (!user) throw new UnauthorizedException('Invalid user.');
-    if (user.isBlacklisted)
+    if (user.isBlacklisted) {
       throw new UnauthorizedException('Your account is suspended.');
+    }
 
     return user;
   }

@@ -107,4 +107,11 @@ export class UserService {
       .getOne();
     return user;
   }
+
+  async findByIdWithRoles(id: string): Promise<User | null> {
+    return this.userRepo.findOne({
+      where: { id },
+      relations: ['userRoleMappings', 'userRoleMappings.role'],
+    });
+  }
 }
