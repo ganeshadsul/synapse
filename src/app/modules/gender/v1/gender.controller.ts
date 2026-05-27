@@ -9,6 +9,7 @@ import {
   Patch,
   Post,
   Put,
+  UseGuards,
 } from '@nestjs/common';
 import { GenderService } from '../gender.service';
 import {
@@ -18,7 +19,9 @@ import {
 } from '../dto/gender.dto';
 import { ResponseMessage } from '../../../common/decorators/response-message.decorator';
 import { RESPONSE_MESSAGE } from '../../../common/constants/messages/response-messages.constant';
+import { JwtAuthGuard } from '../../../common/guards/jwt-auth.guard';
 
+@UseGuards(JwtAuthGuard)
 @Controller({
   path: 'genders',
   version: '1',

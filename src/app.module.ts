@@ -11,9 +11,11 @@ import { TransformInterceptor } from './app/common/interceptors/transform.interc
 import { UserModule } from './app/modules/user/user.module';
 import { SystemModule } from './app/modules/system/system.module';
 import { AuthModule } from './app/modules/auth/auth.module';
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
   imports: [
+    ScheduleModule.forRoot(),
     ConfigModule.forRoot({
       isGlobal: true,
       validationSchema: Joi.object({

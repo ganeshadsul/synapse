@@ -6,6 +6,7 @@ import { JwtModule, JwtModuleOptions } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { RoleModule } from '../role/role.module';
 import { GenderModule } from '../gender/gender.module';
+import { JwtStrategy } from './strategies/jwt.strategy';
 
 @Module({
   imports: [
@@ -23,6 +24,6 @@ import { GenderModule } from '../gender/gender.module';
     }),
   ],
   controllers: [V1AuthController],
-  providers: [AuthService],
+  providers: [AuthService, JwtStrategy],
 })
 export class AuthModule {}

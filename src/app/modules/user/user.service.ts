@@ -94,6 +94,11 @@ export class UserService {
     return user;
   }
 
+  async findOneById(id: string): Promise<User | null> {
+    const user = await this.userRepo.findOneBy({ id });
+    return user;
+  }
+
   async findOneByEmailWithPassword(email: string): Promise<User | null> {
     const user = await this.userRepo
       .createQueryBuilder('user')
@@ -101,5 +106,12 @@ export class UserService {
       .addSelect('user.password')
       .getOne();
     return user;
+  }
+
+  async findByIdWithRoles(id: string): Promise<User | null> {
+    return this.userRepo.findOne({
+      where: { id },
+      relations: ['userRoleMappings', 'userRoleMappings.role'],
+    });
   }
 }
