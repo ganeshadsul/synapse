@@ -6,7 +6,7 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
-import { PermissionCacheService } from '../../modules/role/permission-cache-service/permission-cache.service';
+import { PermissionCacheService } from '../../modules/auth/permission-cache-service/permission-cache.service';
 import { PERMISSIONS_KEY } from '../decorators/require-permissions.decorator';
 import { UserRoleMapping } from '../../modules/user/entities/user-role-mapping.entity';
 import { AuthenticatedRequest } from '../interfaces/authenticatedRequest.interface';
